@@ -2,7 +2,8 @@ from Uber.User.db.models import User
 
 class UserService(object):
 
-    users = []
+    users = [User('user-1','a','a', False), User('user-2','a','a', False),
+             User('driver-1','a','a', False), User('driver-2','a','a', False)]
 
     def get(self):
         return [self.embed(user) for user in self.users]
