@@ -2,16 +2,18 @@ import uvicorn
 from fastapi import FastAPI
 
 from Uber.User.views import user_router
+from Uber.Vehicle.views import vehicle_router
 
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Welcome to Uber!!"}
 
 
 app.include_router(user_router)
+app.include_router(vehicle_router)
 
 
 if __name__ == "__main__":
