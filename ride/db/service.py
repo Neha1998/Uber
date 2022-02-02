@@ -1,5 +1,5 @@
 from Uber.ride.db.models import Ride
-from Uber.Payments import service as payment_service
+from Uber.Payments.manager import Manager as payment_manager
 class Service(object):
 
     rides = []
@@ -10,8 +10,13 @@ class Service(object):
     def update(self, ride_id):
         pass
 
-    def create(self, user_id, vehicle_id, driver_id):
-        ride = Ride(user_id, vehicle_id, driver_id)
+    def fetch(self, ride_id):
+        for ride in self.rides:
+            if str(ride.id) == ride_id:
+                return ride
+
+    def create(self, user_id, vehicle_id, driver_id, coupon_id):
+        ride = Ride(user_id, vehicle_id, driver_id, coupon_id)
         self.rides.append(ride)
         return ride
 
@@ -30,10 +35,9 @@ class Service(object):
         return res
 
     def complete_ride(self, ride_id, km_driven):
-        for ride in self.rides:
-            if str(ride.id)==ride_id and ride.active==1:
-                ride.active = 2  #completed
-                ride.km = km_driven
-                ride.cost = payment_service.get_cost(int(km_driven))
-                ride.save()
-                return ride
+        ride = self.fetch(ride_id)
+        ride.active = 2  #completed
+        ride.km = km_driven
+        ride.cost = payment_manager().create(ride_id)
+        ride.save()
+        return ride

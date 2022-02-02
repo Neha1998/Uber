@@ -1,5 +1,6 @@
 from Uber.ride.db.config import dbservice
 from Uber.Vehicle.db.config import  dbservice as vehicle_db_service
+
 class Manager(object):
     def __init__(self,user_id=None):
         self.user_id =  user_id
@@ -10,7 +11,7 @@ class Manager(object):
     def get_driver_rides(self, user_id):
         return dbservice.get_driver_rides(user_id)
 
-    def assign_ride(self, user_id, start_loc, end_loc, radius=2):
+    def assign_ride(self, user_id, start_loc, end_loc, coupon_id,  radius=2):
 
         # on the basis of start_loc fetch vehicle with active=1 and current_location within radius distance from start_loc
         vehicle = vehicle_db_service.get_vehicle(active=1, radius=radius, curr_loc = int(start_loc))
@@ -19,7 +20,7 @@ class Manager(object):
         vehicle_db_service.update(str(vehicle.id), active=2)
 
         #initiate a ride
-        ride = dbservice.create(user_id, vehicle.id, vehicle.driver_id)
+        ride = dbservice.create(user_id, vehicle.id, vehicle.driver_id, coupon_id)
 
         return dbservice.embed(ride)
 
