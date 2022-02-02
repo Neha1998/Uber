@@ -1,6 +1,6 @@
 from Uber.ride.db.config import dbservice
 from Uber.Vehicle.db.config import  dbservice as vehicle_db_service
-
+from Uber.CouponCode.manager import Manager as CouponManger
 class Manager(object):
     def __init__(self,user_id=None):
         self.user_id =  user_id
@@ -17,6 +17,9 @@ class Manager(object):
         vehicle = vehicle_db_service.get_vehicle(active=1, radius=radius, curr_loc = int(start_loc))
         if not vehicle:
             return dict(status=False, message=f"No Vehicle available in radius. {radius}")
+
+        if coupon_id and coupon_id not in CouponManger().list_all_coupon_ids():
+            return dict(status=False, message=f"Invalid coupon id. {coupon_id}")
 
         #lock the vehicle
         vehicle_db_service.update(str(vehicle.id), active=2)

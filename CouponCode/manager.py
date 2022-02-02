@@ -16,3 +16,7 @@ class Manager(object):
 
     def update(self):
         pass
+
+    def list_all_coupon_ids(self):
+        return [str(c['id']) for c in self.list()]
+
