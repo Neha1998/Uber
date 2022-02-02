@@ -2,13 +2,14 @@ from Uber.Vehicle.db.models import Vehicle
 
 class Service(object):
 
-    vehicles = [Vehicle('driver-1', 'a', 'v-1', False), Vehicle('driver-2', 'b','v-2',False)]
+    vehicles = [Vehicle('driver-1', 'a', 'v-1',4, False),
+                      Vehicle('driver-2', 'b','v-2',6, False)]
 
     def get(self):
         return [self.embed(v) for v in self.vehicles]
 
-    def create(self, name, model, veh_no):
-        veh = Vehicle(name, model, veh_no)
+    def create(self, name, model, veh_no, curr_loc):
+        veh = Vehicle(name, model, veh_no, curr_loc)
         self.vehicles.append(veh)
         return self.embed(veh)
 

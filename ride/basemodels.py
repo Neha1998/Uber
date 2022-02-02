@@ -4,8 +4,8 @@ from pydantic import BaseModel
 
 class AssignRidePayload(BaseModel):
     user_id: str = ''
-    start_location: str = ""
-    end_location: str = ""
+    start_location: int = 0
+    end_location: int = 0
     coupon_id: str = ""
 
 class CompleteRidePayload(BaseModel):

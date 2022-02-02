@@ -6,8 +6,8 @@ class Manager():
     def get(self):
         return dbservice.get()
 
-    def create(self, driver_id, model, veh_no):
-        res = dbservice.create(driver_id, model, veh_no)
+    def create(self, driver_id, model, veh_no, curr_loc):
+        res = dbservice.create(driver_id, model, veh_no, curr_loc)
         return res
 
     def udpate_vehicle(self, veh_id, veh_loc, km_driven=None):

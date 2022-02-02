@@ -36,5 +36,5 @@ async def complete_ride(request: Request, ride_id, km_driven):
     """
     This API completes a ride.
     """
-    res = Manager().complete_ride(ride_id, km_driven)
+    res = Manager().complete_ride(ride_id, int(km_driven))
     return res

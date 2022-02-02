@@ -7,8 +7,8 @@ class Manager(object):
     def list(self):
         return dbservice.list()
 
-    def create(self, name, email, mobile):
-        res = dbservice.create(user_name=name, email=email, mobile=mobile)
+    def create(self, code, value_discount, percent_discount):
+        res = dbservice.create(code, value_discount, percent_discount)
         return res
 
     def delete(self):

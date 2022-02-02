@@ -4,7 +4,7 @@ import uuid
 
 class Coupon:
 
-    def __init__(self, code, value_discount=None, percent_discount=None, _id=True):
+    def __init__(self, code, value_discount=0, percent_discount=0, _id=True):
         self.code = code
         self.value_discount= value_discount
         self.percent_discount = percent_discount

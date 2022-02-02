@@ -15,6 +15,8 @@ class Manager(object):
 
         # on the basis of start_loc fetch vehicle with active=1 and current_location within radius distance from start_loc
         vehicle = vehicle_db_service.get_vehicle(active=1, radius=radius, curr_loc = int(start_loc))
+        if not vehicle:
+            return dict(status=False, message=f"No Vehicle available in radius. {radius}")
 
         #lock the vehicle
         vehicle_db_service.update(str(vehicle.id), active=2)

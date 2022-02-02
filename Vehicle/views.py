@@ -19,7 +19,7 @@ async def create_vehicle(request: Request, payload: Payload):
     """
     This API creates a vehicle
     """
-    res = Manager().create(payload.driver_id, payload.model, payload.vehicle_no)
+    res = Manager().create(payload.driver_id, payload.model, payload.vehicle_no, payload.current_location)
     return res
 
 

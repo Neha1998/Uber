@@ -6,6 +6,7 @@ class Payload(BaseModel):
     driver_id: str = ""
     model: str = ""
     vehicle_no: str = ""
+    current_location: int = 0
 
 
 class LocationPayload(BaseModel):

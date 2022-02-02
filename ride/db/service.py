@@ -36,6 +36,10 @@ class Service(object):
 
     def complete_ride(self, ride_id, km_driven):
         ride = self.fetch(ride_id)
+
+        if ride.active == 2:
+            return dict(status=False, message="Already completed ride.")
+
         ride.active = 2  #completed
         ride.km = km_driven
         ride.cost = payment_manager().create(ride_id)
