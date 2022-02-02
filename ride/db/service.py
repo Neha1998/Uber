@@ -42,6 +42,6 @@ class Service(object):
 
         ride.active = 2  #completed
         ride.km = km_driven
-        ride.cost = payment_manager().create(ride_id)
+        ride.transaction_id = str(payment_manager().create(ride_id)['id'])
         ride.save()
         return ride

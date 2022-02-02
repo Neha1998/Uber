@@ -11,7 +11,7 @@ class Ride:
         self.active = 1  # 1- active ride, 2- completed ride
         self.created_on = datetime.datetime.now()
         self.updated_on = datetime.datetime.now()
-        self.cost = None
+        self.transaction_id = None
         self.km = 0
         self.coupon_id = coupon_id
         self.id = uuid.uuid4()
